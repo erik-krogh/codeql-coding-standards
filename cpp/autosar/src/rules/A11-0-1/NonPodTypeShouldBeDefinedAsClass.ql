@@ -15,12 +15,8 @@
  *       external/autosar/obligation/advisory
  */
 
-import cpp
-import codingstandards.cpp.autosar
-import codingstandards.cpp.Typehelpers
+import NonPodTypeShouldBeDefinedAsClassQuery
 
 from Struct s
-where
-  not isExcluded(s, ClassesPackage::nonPodTypeShouldBeDefinedAsClassQuery()) and
-  not s.isPOD()
+where problem(s)
 select s, "Non-POD type defined as struct instead of class."

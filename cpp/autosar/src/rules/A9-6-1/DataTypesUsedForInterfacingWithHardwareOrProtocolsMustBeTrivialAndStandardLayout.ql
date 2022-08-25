@@ -14,15 +14,9 @@
  *       external/autosar/obligation/required
  */
 
-import cpp
-import codingstandards.cpp.autosar
-import codingstandards.cpp.HardwareOrProtocolInterface
-import codingstandards.cpp.ImplicitHardwareOrProtocolInterfaceClass
+import DataTypesUsedForInterfacingWithHardwareOrProtocolsMustBeTrivialAndStandardLayoutQuery
 
 from HardwareOrProtocolInterfaceClass c
-where
-  not isExcluded(c,
-    ClassesPackage::dataTypesUsedForInterfacingWithHardwareOrProtocolsMustBeTrivialAndStandardLayoutQuery()) and
-  not c.isPOD()
+where problem(c)
 select c,
   "Data type used for hardware interface or communication protocol is not standard layout and trivial."

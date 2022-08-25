@@ -13,17 +13,8 @@
  *       external/autosar/obligation/required
  */
 
-import cpp
-import codingstandards.cpp.autosar
-
-class NonPODType extends Class {
-  NonPODType() { not this.isPOD() }
-}
+import MemberDataInNonPodClassTypesNotPrivateQuery
 
 from NonPODType p, Field f
-where
-  not isExcluded(p, ClassesPackage::memberDataInNonPodClassTypesNotPrivateQuery()) and
-  f = p.getAField() and
-  not f.isCompilerGenerated() and
-  (f.isProtected() or f.isPublic())
+where problem(p, f)
 select f, "Member data in a non-POD class is not private."
